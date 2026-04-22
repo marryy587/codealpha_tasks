@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Object Detection and Tracking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="app-card">
+      <h1>Object Detection and Tracking</h1>
+      <p class="subtitle">Free browser-based AI using TensorFlow.js</p>
+
+      <div class="controls">
+        <button id="startBtn">Start Camera</button>
+        <button id="stopBtn">Stop Camera</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-box">
+          <span class="label">Status</span>
+          <span id="status">Loading model...</span>
+        </div>
+        <div class="stat-box">
+          <span class="label">Objects Detected</span>
+          <span id="objectCount">0</span>
+        </div>
+      </div>
+
+      <div class="video-wrapper">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div class="info">
+        <p>
+          This project uses a free pre-trained COCO-SSD model in the browser to
+          detect and track objects in real time.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+  <script src="script.js"></script>
+</body>
+</html>

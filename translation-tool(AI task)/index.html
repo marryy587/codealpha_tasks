@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Translation Tool</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Language Translation Tool</h1>
+      <p class="subtitle">Translate text using a free API</p>
+
+      <textarea id="inputText" placeholder="Enter text to translate..."></textarea>
+
+      <div class="selectors">
+        <div class="field">
+          <label for="sourceLang">Source Language</label>
+          <select id="sourceLang">
+            <option value="en">English</option>
+            <option value="ur">Urdu</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+            <option value="ar">Arabic</option>
+            <option value="hi">Hindi</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="targetLang">Target Language</label>
+          <select id="targetLang">
+            <option value="ur">Urdu</option>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+            <option value="ar">Arabic</option>
+            <option value="hi">Hindi</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="translateBtn" type="button">Translate</button>
+        <button id="copyBtn" type="button" class="secondary">Copy</button>
+      </div>
+
+      <div class="output-box">
+        <h3>Translated Text</h3>
+        <p id="outputText">Your translated text will appear here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
