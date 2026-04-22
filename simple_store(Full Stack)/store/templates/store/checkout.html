@@ -1,0 +1,9 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="success-box">
+    <h1>Order Placed Successfully</h1>
+    <p>Thank you for shopping with us. Your order has been processed successfully.</p>
+    <a href="{% url 'home' %}" class="btn primary-btn">Continue Shopping</a>
+</div>
+{% endblock %}

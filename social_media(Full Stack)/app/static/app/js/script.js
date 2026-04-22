@@ -1,0 +1,1 @@
+console.log("Mini social media app loaded");

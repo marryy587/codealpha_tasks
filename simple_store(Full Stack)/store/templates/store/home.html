@@ -1,0 +1,36 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to SimpleStore</h1>
+        <p>Discover quality products with a clean and simple shopping experience.</p>
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">Our Products</h2>
+
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image-box">
+                {% if product.image %}
+                    <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+                {% else %}
+                    <div class="image-placeholder">No Image</div>
+                {% endif %}
+            </div>
+
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p class="price">Rs. {{ product.price }}</p>
+                <a href="{% url 'product_detail' product.pk %}" class="btn primary-btn full-btn">View Details</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="empty-text">No products available yet. Please add products from the admin panel.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

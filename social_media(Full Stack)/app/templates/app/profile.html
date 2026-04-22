@@ -1,0 +1,58 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="profile-box">
+    <h1>{{ profile_user.username }}</h1>
+    <p>{{ profile.bio }}</p>
+
+    <p>Followers: {{ profile_user.followers.count }}</p>
+    <p>Following: {{ profile_user.following.count }}</p>
+
+    {% if user.is_authenticated and user != profile_user %}
+        <a href="{% url 'follow_toggle' profile_user.username %}" class="btn">
+            {% if is_following %}Unfollow{% else %}Follow{% endif %}
+        </a>
+    {% endif %}
+</div>
+
+<h2>{{ profile_user.username }}'s Posts</h2>
+
+{% if profile_user.is_superuser or profile_user.is_staff %}
+    <p>This account is used for administration and has no public posts.</p>
+{% else %}
+    {% for post in posts %}
+    <div class="post-card">
+        <p>{{ post.content }}</p>
+        <small>{{ post.created_at }}</small>
+
+        <div class="post-actions">
+            {% if user.is_authenticated %}
+                <a href="{% url 'like_post' post.id %}">Like ({{ post.total_likes }})</a>
+            {% else %}
+                <span>Likes: {{ post.total_likes }}</span>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h4>Comments</h4>
+
+            {% for comment in post.comments.all %}
+                <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'add_comment' post.id %}">
+                {% csrf_token %}
+                <input type="text" name="text" placeholder="Write a comment..." required>
+                <button type="submit">Comment</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p>No posts yet.</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<h1>All Users</h1>
+
+{% for user_obj in users %}
+<div class="post-card">
+    <h3>{{ user_obj.username }}</h3>
+    <a href="{% url 'profile' user_obj.username %}" class="btn">View Profile</a>
+</div>
+{% empty %}
+<p>No users found.</p>
+{% endfor %}
+{% endblock %}
+def profile_view(request, username):
+    user_obj = get_object_or_404(User, username=username)
+    profile, created = Profile.objects.get_or_create(user=user_obj)
+    posts = Post.objects.filter(user=user_obj).order_by('-created_at')
+
+    is_following = False
+    if request.user.is_authenticated and request.user != user_obj:
+        is_following = Follow.objects.filter(follower=request.user, following=user_obj).exists()
+
+    context = {
+        'profile_user': user_obj,
+        'profile': profile,
+        'posts': posts,
+        'is_following': is_following
+    }
+    return render(request, 'app/profile.html', context)

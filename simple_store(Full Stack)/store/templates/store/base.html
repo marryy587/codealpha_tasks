@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Store</title>
+    <link rel="stylesheet" href="/static/store/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">SimpleStore</a>
+
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cart' %}">Cart</a>
+                    <span class="welcome-text">Hi, {{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="nav-btn secondary">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-btn secondary">Login</a>
+                    <a href="{% url 'register' %}" class="nav-btn primary">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="/static/store/js/script.js"></script>
+</body>
+</html>
